@@ -1,5 +1,6 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 interface Credentials {
@@ -11,6 +12,13 @@ interface Credentials {
 function SignupPage() {
   const [creds, setCreds] = useState<Credentials>({ name: "", email: "", password: "" });
   const navigate = useNavigate();
+
+  const user  = useSelector((state : any) => state.user.userInfo)
+  
+  if (user){
+    navigate('/')
+  }
+
 
   const submithandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

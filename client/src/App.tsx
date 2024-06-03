@@ -36,6 +36,7 @@ useEffect(() => {
 
 if (!user && localStorage.getItem('auth_token')) getuserInfo();
 
+
 },[pathname])
 
 

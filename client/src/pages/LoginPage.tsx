@@ -1,5 +1,6 @@
 import  { useState, FormEvent, ChangeEvent } from "react";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 interface Creds {
@@ -11,6 +12,13 @@ function LoginPage() {
   const [creds, setCreds] = useState<Creds>({ email: "", password: "" });
   const navigate = useNavigate();
 
+  const user  = useSelector((state : any) => state.user.userInfo)
+  
+  if (user){
+    navigate('/')
+  }
+
+  
   const submithandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const res = await fetch(`${import.meta.env.VITE_SERVER_DOMAIN}/user/login`, {

@@ -28,7 +28,7 @@ const connect = async() => {
 const Port = process.env.SERVER_PORT || 3000
 
 
-    mongoose.connect('mongodb+srv://adhakad036:yVbMgDqpy6eRE5Az@internship.mzpcxnm.mongodb.net/').then(() => {
+    mongoose.connect(`${process.env.MONGO_DB_URI}`).then(() => {
         app.listen(Port,() => {
             console.log('server is on port and db is connected',Port)
         })
