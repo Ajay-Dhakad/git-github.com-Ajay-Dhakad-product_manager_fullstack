@@ -77,7 +77,7 @@ router.post('/generateinvoice', async(req, res) => {
           Totalsum += product.totalAmount 
         })
 
-        const browser = await puppeteer.launch({headless:true,args: ['--no-sandbox', '--disable-setuid-sandbox'],executablePath: process.env.CHROME_EXECUTABLE_PATH || '/opt/render/.cache/puppeteer/chrome/linux-125.0.6422.78/chrome-linux64/chrome'}); 
+        const browser = await puppeteer.launch({headless:true,args: ['--no-sandbox', '--disable-setuid-sandbox']}); 
         
         const page = await browser.newPage();
 
@@ -92,6 +92,8 @@ router.post('/generateinvoice', async(req, res) => {
 
 
       const pdfBuffer = await page.pdf({ format: 'A4',timeout:0,printBackground:true});
+
+      console.log('generated')
 
   
       await browser.close();
