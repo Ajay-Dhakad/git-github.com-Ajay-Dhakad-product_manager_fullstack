@@ -57,7 +57,7 @@ export default function renderInvoiceTemplate(products,Totalsum){
     <div class="mb-6">
       <div class="flex justify-between">
         <p class="font-bold">Grand Total</p>
-        <p class="font-bold">₹ ${Totalsum + (Totalsum * 0.18)}</p>
+        <p class="font-bold text-blue-500">₹ ${Totalsum + (Totalsum * 0.18)}</p>
       </div>
       <div class="border-t border-black"></div>
     </div>

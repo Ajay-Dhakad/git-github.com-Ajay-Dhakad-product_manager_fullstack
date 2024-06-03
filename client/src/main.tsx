@@ -2,6 +2,13 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 import { createBrowserRouter,RouterProvider } from 'react-router-dom'
+import LoginPage from './pages/LoginPage.tsx'
+import SignupPage from './pages/SignupPage.tsx'
+import { Provider } from 'react-redux'
+import store from './store/index.ts'
+import HomePage from './pages/HomePage.tsx'
+import ProductsPage from './pages/ProductsPage.tsx'
+
 
 const router = createBrowserRouter([
   {
@@ -10,13 +17,16 @@ const router = createBrowserRouter([
     children:[
       {
         path: '/',
-        element: <h1>home</h1>,
+        element: <HomePage/>,
       },{
         path: '/login',
-        element: <h1>about</h1>,
+        element:<LoginPage/>
       },{
         path: '/signup',  
-        element: <h1>about</h1>,
+        element: <SignupPage/>,
+      },{ 
+        path: '/products',
+        element: <ProductsPage/>,
       }
     ]
   },
@@ -24,6 +34,7 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <>
-    <RouterProvider router={router}/>
+  <Provider store={store}> <RouterProvider router={router}/></Provider>
+
   </>
 )
