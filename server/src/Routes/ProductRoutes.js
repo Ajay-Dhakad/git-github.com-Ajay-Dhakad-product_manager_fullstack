@@ -77,7 +77,8 @@ router.post('/generateinvoice', async(req, res) => {
           Totalsum += product.totalAmount 
         })
 
-        const browser = await puppeteer.launch({headless:true,args: ['--no-sandbox', '--disable-setuid-sandbox'],}); 
+        const browser = await puppeteer.launch({headless:true,args: ['--no-sandbox', '--disable-setuid-sandbox'],executablePath: process.env.CHROME_EXECUTABLE_PATH || '/opt/render/.cache/puppeteer/chrome/linux-125.0.6422.78/chrome-linux/chrome' // Ensure this path is correct
+    }); 
         
         const page = await browser.newPage();
 
