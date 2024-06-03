@@ -20,11 +20,15 @@ function ProductsPage() {
   const products = useSelector((state: any) => state.product.products);
   const user = useSelector((state: any) => state.user.userInfo);
 
-  if (!user) {
-    navigate('/');
-  }
+
+
+//   if (!user) {
+//     navigate('/');
+//   }
 
   const downloadInvoice = async () => {
+
+    if (!user) return;
     const loadingtoast = toast.loading('Downloading Invoice!...');
 
     const response = await fetch(`${import.meta.env.VITE_SERVER_DOMAIN}/product/generateinvoice`, {
@@ -78,7 +82,10 @@ function ProductsPage() {
     getAllProducts();
   }, []);
 
-  return (
+ 
+
+
+  return  products?.length > 0 ? (
     <div className="mx-auto max-w-3xl rounded-lg bg-white p-6 shadow-md sm:p-8">
       <br />
       <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between">
@@ -141,7 +148,15 @@ function ProductsPage() {
         </div>
       </div>
     </div>
-  );
+  ) : (
+   
+
+        <div className="w-full h-full flex justify-center items-center flex-col bg-slate-800">
+            <h1 className="text-white py-2 text-xl">Please Add A New Product To Generate Invoice!</h1>
+            <button onClick={() => navigate('/')} className="bg-indigo-600 px-5 py-2 rounded-lg text-white font-bold">Add Product</button>
+        </div>
+
+  )
 }
 
 export default ProductsPage;
