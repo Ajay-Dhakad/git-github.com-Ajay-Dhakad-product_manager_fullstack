@@ -3,6 +3,7 @@ import { Product } from "../models/ProductModel.js";
 import userAuthVerification from "../middleware/authMiddleware.js";
 import renderInvoiceTemplate from "../InvoiceTemplate/renderInvoiceTemplate.js";
 import puppeteer from 'puppeteer'
+import { executablePath } from "puppeteer";
 const router = Router();
 
 router.use(userAuthVerification)
@@ -77,11 +78,11 @@ router.post('/generateinvoice', async(req, res) => {
           Totalsum += product.totalAmount 
         })
 
-        const browser = await puppeteer.launch({headless:true,args: ['--no-sandbox', '--disable-setuid-sandbox']}); 
+        const browser = await puppeteer.launch({headless:true,args: ['--no-sandbox', '--disable-setuid-sandbox'],executablePath: executablePath(),}); 
         
         const page = await browser.newPage();
 
-        await page.setDefaultNavigationTimeout(60000); // Increase default navigation timeout to 60 seconds
+        await page.setDefaultNavigationTimeout(60000);
 
       
       const htmlContent = await renderInvoiceTemplate(products,Totalsum); 
